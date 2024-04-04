@@ -1,0 +1,51 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Menu</mat-card-title>
+    <mat-card-subtitle
+      >Drag and drop items to sort them. Click to Edit.</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div cdkDropListGroup>
+      <div class="example-container">
+        @for (section of sections; track section.title) {
+
+        <h4>{{ section.title }}</h4>
+
+        <div
+          cdkDropList
+          [cdkDropListData]="section.menuItems"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (item of section.menuItems; track item.name) {
+          <div (click)="itemClicked(item)" class="example-box" cdkDrag>
+            <b
+              >{{
+                item.name.length > 20
+                  ? item.name.substring(0, 20) + "..."
+                  : item.name
+              }}
+            </b>
+            <i>{{ item.price | currency }}</i>
+            {{
+              item.description.length > 30
+                ? item.description.substring(0, 30) + "..."
+                : item.description
+            }}
+            {{
+              item.description.length > 30
+                ? item.description.substring(0, 30) + "..."
+                : item.description
+            }}
+            @if (item.imagePath) {
+            <img height="30px" [src]="item.imagePath" />
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

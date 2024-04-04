@@ -1,0 +1,29 @@
+<h2>Create Menu Item</h2>
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput [(ngModel)]="newMenuItem.name" />
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Section</mat-label>
+  <mat-select [(ngModel)]="sectionTitle">
+    @for (section of sections; track section.title) {
+    <mat-option value="{{ section.title }}">{{ section.title }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Image URL</mat-label>
+  <input [(ngModel)]="newMenuItem.imagePath" matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Price</mat-label>
+  <input type="number" [(ngModel)]="newMenuItem.price" matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Description</mat-label>
+  <textarea matInput [(ngModel)]="newMenuItem.description"></textarea>
+</mat-form-field>
+<button mat-button color="primary" (click)="addNewItem(sectionTitle)">
+  Add
+</button>

@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="spacer"></span>
+
+  @if (isAuthenticated){
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+    [routerLink]="['/menu/' + user?.id]"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+  <button
+    (click)="logoutClicked()"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  } @else{
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    [routerLink]="['/auth']"
+    routerLinkActive="router-link-active"
+  >
+    <mat-icon>login</mat-icon>
+  </button>
+  }
+</mat-toolbar>

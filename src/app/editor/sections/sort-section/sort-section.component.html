@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Menu Sections</mat-card-title>
+    <mat-card-subtitle
+      >Drag and drop items to sort them. Click to Edit.</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      @for (section of sections; track section) {
+      <div (click)="sectionClicked(section)" class="example-box" cdkDrag>
+        <b>{{ section.title }}</b> <i>{{ section.menuItems.length }} items</i>
+      </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

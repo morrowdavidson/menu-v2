@@ -1,0 +1,13 @@
+<div class="featured-image" [style]="getBackgroundImageStyle()"></div>
+
+<div class="logo">
+  <img height="150px" [src]="restaurant.logoURL" />
+</div>
+<h2>{{ restaurant.name }}</h2>
+
+<p>{{ restaurant.address }}</p>
+<p>{{ restaurant.city }}, {{ restaurant.state }}</p>
+<p>
+  <a [href]="'tel:' + restaurant.phone"> {{ restaurant.phone }}</a> |
+  <a [href]="restaurant.website">{{ restaurant.website }}</a>
+</p>

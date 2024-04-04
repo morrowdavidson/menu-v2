@@ -1,0 +1,12 @@
+<h2>Edit Menu Section</h2>
+
+<mat-form-field>
+  <mat-label>Section Name</mat-label>
+  <input matInput [(ngModel)]="currentSection.title" />
+</mat-form-field>
+<div class="button-container">
+  <button (click)="saveClicked()" mat-button color="primary">Save</button>
+  <button (click)="deleteClicked(currentSection)" mat-button color="warn">
+    Delete
+  </button>
+</div>

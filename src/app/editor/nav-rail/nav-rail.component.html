@@ -1,0 +1,82 @@
+<nav>
+  <ul>
+    <li>
+      <button
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        [routerLink]="['/']"
+      >
+        <mat-icon
+          ><span class="material-symbols-outlined">
+            dinner_dining
+          </span></mat-icon
+        >
+      </button>
+      Items
+    </li>
+    <li>
+      <button
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        [routerLink]="['/sections']"
+      >
+        <mat-icon>lists</mat-icon>
+      </button>
+      Sections
+    </li>
+    <li>
+      <button
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        [routerLink]="['/restaurant']"
+      >
+        <mat-icon>restaurant</mat-icon>
+      </button>
+      Restaurant
+    </li>
+    <li>
+      <button
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        [routerLink]="['/preview']"
+      >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      Preview
+    </li>
+    <li>
+      <button
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        (click)="save()"
+      >
+        <mat-icon>save</mat-icon>
+      </button>
+      Save
+    </li>
+
+    <li>
+      <button
+        routerLinkActive="active-link"
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a home icon"
+        (click)="fetch()"
+      >
+        <mat-icon>download</mat-icon>
+      </button>
+      Fetch
+    </li>
+  </ul>
+</nav>
