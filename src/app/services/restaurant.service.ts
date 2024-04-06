@@ -14,14 +14,23 @@ export class RestaurantService {
   });
   restaurant$ = this._restaurant.asObservable();
 
+  private _restaurantForView = new BehaviorSubject<Restaurant>({
+    ...EMPTY_RESTAURANT,
+  });
+  restaurantForView$ = this._restaurantForView.asObservable();
+
   setRestaurant(restaurant: Restaurant) {
     this._restaurant.next(restaurant);
-    console.log(this.restaurant$);
   }
   getRestaurant() {
     return this._restaurant.value;
   }
   resetRestaurant() {
     this._restaurant.next({ ...EMPTY_RESTAURANT });
+  }
+  setRestuarantForView(returnedRestaurant: Restaurant) {
+    this._restaurantForView.next(returnedRestaurant);
+    console.log('FROM RESTAURANT SERVICE:');
+    console.log(this._restaurantForView);
   }
 }

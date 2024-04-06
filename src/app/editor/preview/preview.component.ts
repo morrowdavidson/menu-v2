@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MenuService } from '../../services/menu.service';
 import { Section } from '../../models/section.model';
@@ -17,6 +17,8 @@ import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
   styleUrl: './preview.component.scss',
 })
 export class PreviewComponent {
+  @Input() useViewSubscription: boolean = false;
+
   sections: Section[] = [];
   selectionsSubscription?: Subscription;
   loginSubscription?: Subscription;
@@ -28,14 +30,22 @@ export class PreviewComponent {
   ) {}
 
   ngOnInit() {
-    this.selectionsSubscription = this.menuService.sections$.subscribe(
-      (sectionEls) => {
-        this.sections = sectionEls;
-      }
-    );
-    this.loginSubscription = this.loginService.user.subscribe((user) => {
-      this.user = user;
-    });
+    if (this.useViewSubscription) {
+      this.selectionsSubscription = this.menuService.sectionsForView$.subscribe(
+        (sectionEls) => {
+          this.sections = sectionEls;
+        }
+      );
+    } else {
+      this.selectionsSubscription = this.menuService.sections$.subscribe(
+        (sectionEls) => {
+          this.sections = sectionEls;
+        }
+      );
+      this.loginSubscription = this.loginService.user.subscribe((user) => {
+        this.user = user;
+      });
+    }
   }
   ngOnDestroy() {
     this.selectionsSubscription?.unsubscribe();

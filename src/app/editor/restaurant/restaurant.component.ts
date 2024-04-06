@@ -7,6 +7,7 @@ import { RestaurantService } from '../../services/restaurant.service';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-restaurant',
@@ -25,11 +26,16 @@ import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
 export class RestaurantComponent {
   constructor(private restaurantService: RestaurantService) {}
 
+  editRestaurantSubscription?: Subscription;
   editRestaurant: Restaurant;
 
   ngOnInit() {
-    this.restaurantService.restaurant$.subscribe(
-      (restaurant) => (this.editRestaurant = restaurant)
-    );
+    this.editRestaurantSubscription =
+      this.restaurantService.restaurant$.subscribe(
+        (restaurant) => (this.editRestaurant = restaurant)
+      );
+  }
+  ngOnDestroy() {
+    this.editRestaurantSubscription?.unsubscribe();
   }
 }
