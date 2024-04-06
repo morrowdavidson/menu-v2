@@ -25,5 +25,11 @@ import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
 export class RestaurantComponent {
   constructor(private restaurantService: RestaurantService) {}
 
-  editRestaurant: Restaurant = this.restaurantService.restaurant;
+  editRestaurant: Restaurant;
+
+  ngOnInit() {
+    this.restaurantService.restaurant$.subscribe(
+      (restaurant) => (this.editRestaurant = restaurant)
+    );
+  }
 }

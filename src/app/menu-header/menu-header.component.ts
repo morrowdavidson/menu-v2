@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
+import { Restaurant } from '../models/restaurant.model';
 
 @Component({
   selector: 'app-menu-header',
@@ -10,8 +11,14 @@ import { RestaurantService } from '../services/restaurant.service';
 })
 export class MenuHeaderComponent {
   constructor(private restaurantService: RestaurantService) {}
+  restaurant: Restaurant;
 
-  restaurant = this.restaurantService.restaurant;
+  ngOnInit() {
+    this.restaurantService.restaurant$.subscribe((restaurant) => {
+      this.restaurant = restaurant;
+    });
+  }
+
   getBackgroundImageStyle() {
     return `background-image:url(${this.restaurant.featuredImgURL})`;
   }
