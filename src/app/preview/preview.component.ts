@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MenuService } from '../../services/menu.service';
-import { Section } from '../../models/section.model';
+import { MenuService } from '../services/menu.service';
+import { Section } from '../models/section.model';
 import { Subscription } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import { User } from '../../models/user.model';
-import { LoginService } from '../../services/login.service';
-import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
+import { User } from '../models/user.model';
+import { LoginService } from '../services/login.service';
+import { MenuHeaderComponent } from '../menu-header/menu-header.component';
 
 @Component({
   selector: 'app-preview',

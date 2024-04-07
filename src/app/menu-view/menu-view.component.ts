@@ -5,7 +5,7 @@ import { Section } from '../models/section.model';
 import { MenuService } from '../services/menu.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CurrencyPipe } from '@angular/common';
-import { PreviewComponent } from '../editor/preview/preview.component';
+import { PreviewComponent } from '../preview/preview.component';
 import { MenuHeaderComponent } from '../menu-header/menu-header.component';
 
 @Component({
