@@ -111,7 +111,7 @@ export class DataStorageService {
     this.loginService.user
       .pipe(
         take(1),
-        exhaustMap((user) => {
+        exhaustMap(() => {
           return this.http.get<Section[]>(
             'https://ng-course-c5335-default-rtdb.firebaseio.com/users/' +
               userId +
@@ -131,10 +131,31 @@ export class DataStorageService {
         })
       )
       .subscribe((sections: Section[]) => {
-        console.log('Sections For View:');
+        console.log('Sections For View In DataStorage:');
         console.log(sections);
 
         this.menuService.setSectionsForView(sections);
+      });
+    this.loginService.user
+      .pipe(
+        take(1),
+        exhaustMap(() => {
+          return this.http.get<Restaurant>(
+            'https://ng-course-c5335-default-rtdb.firebaseio.com/users/' +
+              userId +
+              '/restaurant.json'
+
+            // ?auth=' +
+            // user?.token
+          );
+        })
+      )
+      .subscribe((restaurant: Restaurant) => {
+        console.log(restaurant);
+
+        this.restaurantService.setRestuarantForView(restaurant);
+        console.log('Restaurant For View In DataStorage:');
+        console.log(restaurant);
       });
   }
 }
