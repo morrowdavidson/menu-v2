@@ -2,11 +2,15 @@ import { Component, Input } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant } from '../models/restaurant.model';
 import { Subscription } from 'rxjs';
+import { MatButton } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-menu-header',
   standalone: true,
-  imports: [],
+  imports: [MatButton, MatIconModule, MatIconButton, MatButtonModule],
   templateUrl: './menu-header.component.html',
   styleUrl: './menu-header.component.scss',
 })
