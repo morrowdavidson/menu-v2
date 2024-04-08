@@ -1,13 +1,35 @@
-<div class="featured-image" [style]="getBackgroundImageStyle()"></div>
+<div class="container">
+  <div class="featured-image" [style]="getBackgroundImageStyle()"></div>
 
-<div class="logo">
-  <img height="150px" [src]="restaurant.logoURL" />
+  <div class="logo">
+    <img height="100px" [src]="restaurant.logoURL" />
+  </div>
+  <div class="name">
+    <h2>{{ restaurant.name }}</h2>
+  </div>
+  <div class="meta-data address">
+    <div>
+      <button mat-button class="meta-button" color="primary">
+        <mat-icon>location_on</mat-icon>
+        <p>{{ restaurant.address }}</p>
+        <p class="city-state">{{ restaurant.city }}, {{ restaurant.state }}</p>
+      </button>
+    </div>
+  </div>
+  <div class="phone">
+    <a [href]="'tel:' + restaurant.phone">
+      <button mat-button class="meta-button" color="primary">
+        <mat-icon>call</mat-icon>
+        {{ restaurant.phone }}
+      </button>
+    </a>
+  </div>
+  <div class="website">
+    <a [href]="restaurant.website">
+      <button mat-button class="meta-button" color="primary">
+        <mat-icon>language</mat-icon>
+        {{ restaurant.website }}
+      </button>
+    </a>
+  </div>
 </div>
-<h2>{{ restaurant.name }}</h2>
-
-<p>{{ restaurant.address }}</p>
-<p>{{ restaurant.city }}, {{ restaurant.state }}</p>
-<p>
-  <a [href]="'tel:' + restaurant.phone"> {{ restaurant.phone }}</a> |
-  <a [href]="restaurant.website">{{ restaurant.website }}</a>
-</p>
