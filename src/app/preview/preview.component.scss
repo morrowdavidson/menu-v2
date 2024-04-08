@@ -1,8 +1,52 @@
-:host {
-  padding: 2em;
+.container {
+  padding: 1em;
+  max-width: 30em;
   margin-right: auto;
   margin-left: auto;
 }
-.mat-mdc-tab-group {
-  max-width: 800px;
+.menu-item-container {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.5em;
+}
+
+.menu-item-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  flex-grow: 1;
+}
+.menu-item-content h4 {
+  margin: 0;
+  padding: 0;
+}
+.menu-item-content p {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  padding: 0;
+}
+.description {
+  font-size: 0.8em;
+  color: #646464;
+}
+
+.price {
+  font-size: 0.8em;
+  color: #333;
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.image-container img {
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  align-self: flex-end;
 }
