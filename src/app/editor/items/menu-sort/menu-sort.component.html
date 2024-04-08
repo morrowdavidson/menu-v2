@@ -2,8 +2,8 @@
   <mat-card-header>
     <mat-card-title>Menu</mat-card-title>
     <mat-card-subtitle
-      >Drag and drop items to sort them. Click to Edit.</mat-card-subtitle
-    >
+      >Click to Edit. Drag and drop to sort.
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div cdkDropListGroup>
@@ -22,8 +22,8 @@
           <div (click)="itemClicked(item)" class="example-box" cdkDrag>
             <b
               >{{
-                item.name.length > 20
-                  ? item.name.substring(0, 20) + "..."
+                item.name.length > 30
+                  ? item.name.substring(0, 30) + "..."
                   : item.name
               }}
             </b>
@@ -33,11 +33,7 @@
                 ? item.description.substring(0, 30) + "..."
                 : item.description
             }}
-            {{
-              item.description.length > 30
-                ? item.description.substring(0, 30) + "..."
-                : item.description
-            }}
+
             @if (item.imagePath) {
             <img height="30px" [src]="item.imagePath" />
             }

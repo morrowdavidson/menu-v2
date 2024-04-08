@@ -9,6 +9,7 @@ import { MenuService } from '../../../services/menu.service';
 import { Section } from '../../../models/section.model';
 import { MatCardModule } from '@angular/material/card';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-sort-section',
@@ -18,7 +19,10 @@ import { Subscription } from 'rxjs';
   styleUrl: './sort-section.component.scss',
 })
 export class SortSectionComponent {
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    private dataService: DataStorageService
+  ) {}
   sections: Section[] = [];
   currentSection: Section = { title: '', menuItems: [] };
   private subscriptions = new Subscription();
@@ -37,6 +41,7 @@ export class SortSectionComponent {
 
   drop(event: CdkDragDrop<Section[]>) {
     moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
+    this.dataService.storeMenu();
   }
   sectionClicked(section: Section) {
     this.menuService.setCurrentSection(section);

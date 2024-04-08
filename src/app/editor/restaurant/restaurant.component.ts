@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
 import { Subscription } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-restaurant',
@@ -19,6 +20,7 @@ import { Subscription } from 'rxjs';
     FormsModule,
     MatButton,
     MenuHeaderComponent,
+    MatCardModule,
   ],
   templateUrl: './restaurant.component.html',
   styleUrl: './restaurant.component.scss',

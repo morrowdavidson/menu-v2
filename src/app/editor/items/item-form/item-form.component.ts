@@ -9,6 +9,7 @@ import { MenuService } from '../../../services/menu.service';
 import { Section } from '../../../models/section.model';
 import { Subscription } from 'rxjs';
 import { FileUpload } from '../../../models/file-upload.model';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-item-form',
@@ -29,7 +30,10 @@ export class ItemFormComponent {
   selectedFile: File | null = null;
   currentFileUpload?: FileUpload;
 
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -51,6 +55,7 @@ export class ItemFormComponent {
   addNewItem(section: string) {
     this.menuService.addMenuItem(this.newMenuItem, this.sectionTitle);
     console.log(this.sectionTitle);
+    this.dataService.storeMenu();
     this.clearForm();
   }
   clearForm() {

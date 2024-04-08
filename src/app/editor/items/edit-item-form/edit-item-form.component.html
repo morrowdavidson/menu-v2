@@ -1,24 +1,26 @@
-<h2>Edit Menu Item</h2>
-<mat-form-field>
-  <mat-label>Name</mat-label>
-  <input matInput [(ngModel)]="editMenuItem.name" />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Image URL</mat-label>
-  <input [(ngModel)]="editMenuItem.imagePath" matInput />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Price</mat-label>
-  <input type="number" [(ngModel)]="editMenuItem.price" matInput />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Description</mat-label>
-  <textarea matInput [(ngModel)]="editMenuItem.description"></textarea>
-</mat-form-field>
-<div class="button-container">
-  <button mat-button color="primary" (click)="cancel()">Save</button>
+<div class="container">
+  <h2>Edit Menu Item</h2>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="editMenuItem.name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Image URL</mat-label>
+    <input [(ngModel)]="editMenuItem.imagePath" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input type="number" [(ngModel)]="editMenuItem.price" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="editMenuItem.description"></textarea>
+  </mat-form-field>
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="cancel()">Save</button>
 
-  <button mat-button color="warn" (click)="deleteItem(editMenuItem)">
-    Delete Item
-  </button>
+    <button mat-button color="warn" (click)="deleteItem(editMenuItem)">
+      Delete Item
+    </button>
+  </div>
 </div>

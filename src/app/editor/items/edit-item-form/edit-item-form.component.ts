@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../../services/menu.service';
 import { Section } from '../../../models/section.model';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-edit-item-form',
@@ -31,7 +32,10 @@ export class EditItemFormComponent {
   };
   private subscriptions = new Subscription();
 
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -59,10 +63,12 @@ export class EditItemFormComponent {
   };
   addNewItem(section: string) {
     this.menuService.addMenuItem(this.newMenuItem, this.sectionTitle);
+    this.dataService.storeMenu();
     console.log(this.sectionTitle);
   }
   deleteItem(itemToBeDeleted: MenuItem) {
     this.menuService.deleteMenuItem(this.editMenuItem);
+    this.dataService.storeMenu();
   }
   cancel() {
     this.menuService.cancelEdit();

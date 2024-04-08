@@ -2,6 +2,8 @@ nav {
   background-color: rgb(242, 245, 255);
   width: 70px;
   height: calc(100vh - 64px);
+  position: sticky;
+  top: 0;
 }
 
 ul {

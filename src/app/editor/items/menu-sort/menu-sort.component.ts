@@ -13,6 +13,7 @@ import { MenuItem } from '../../../models/menu-item.model';
 import { CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-menu-sort',
@@ -31,7 +32,10 @@ export class MenuSortComponent implements OnInit {
   sections: Section[] = [];
   selectionsSubscription?: Subscription;
 
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit() {
     this.selectionsSubscription = this.menuService.sections$.subscribe(
@@ -67,5 +71,6 @@ export class MenuSortComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.dataService.storeMenu();
   }
 }

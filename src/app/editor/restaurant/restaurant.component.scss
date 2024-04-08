@@ -1,6 +1,14 @@
 :host {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   margin: 2em;
+  flex-wrap: wrap;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2em;
+}
+.preview-card {
 }

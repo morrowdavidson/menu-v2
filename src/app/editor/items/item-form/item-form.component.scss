@@ -4,3 +4,9 @@
   align-items: flex-start;
   padding: 2em;
 }
+.container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
