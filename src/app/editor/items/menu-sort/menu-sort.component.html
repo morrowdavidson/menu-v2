@@ -20,19 +20,28 @@
         >
           @for (item of section.menuItems; track item.name) {
           <div (click)="itemClicked(item)" class="example-box" cdkDrag>
-            <b
-              >{{
-                item.name.length > 30
-                  ? item.name.substring(0, 30) + "..."
-                  : item.name
-              }}
-            </b>
-            <i>{{ item.price | currency }}</i>
-            {{
-              item.description.length > 30
-                ? item.description.substring(0, 30) + "..."
-                : item.description
-            }}
+            <div class="sort-content">
+              <div class="sort-name">
+                <b
+                  >{{
+                    item.name.length > 30
+                      ? item.name.substring(0, 30) + "..."
+                      : item.name
+                  }}
+                </b>
+              </div>
+
+              <div class="sort-description">
+                {{
+                  item.description.length > 30
+                    ? item.description.substring(0, 30) + "..."
+                    : item.description
+                }}
+              </div>
+              <div class="sort-price">
+                <i>{{ item.price | currency }}</i>
+              </div>
+            </div>
 
             @if (item.imagePath) {
             <img height="30px" [src]="item.imagePath" />

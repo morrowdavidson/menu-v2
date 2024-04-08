@@ -25,7 +25,12 @@
     <mat-label>Description</mat-label>
     <textarea matInput [(ngModel)]="newMenuItem.description"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="addNewItem(sectionTitle)">
+  <button
+    [disabled]="sectionTitle == 'Default Section'"
+    mat-raised-button
+    color="primary"
+    (click)="addNewItem(sectionTitle)"
+  >
     Add Item
   </button>
 </div>
