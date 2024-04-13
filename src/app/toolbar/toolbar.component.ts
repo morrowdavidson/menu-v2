@@ -19,7 +19,7 @@ export class ToolbarComponent implements OnInit {
   private userSub: Subscription = new Subscription();
   user: User | null = null;
 
-  constructor(public loginService: LoginService) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
     this.userSub = this.loginService.user.subscribe((user) => {

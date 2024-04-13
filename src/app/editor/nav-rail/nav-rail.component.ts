@@ -5,6 +5,9 @@ import { MatIconButton } from '@angular/material/button';
 import { MatMiniFabButton } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { DataStorageService } from '../../services/data-storage.service';
+import { LoginService } from '../../services/login.service';
+import { Subscription } from 'rxjs';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-nav-rail',
@@ -20,7 +23,24 @@ import { DataStorageService } from '../../services/data-storage.service';
   styleUrl: './nav-rail.component.scss',
 })
 export class NavRailComponent {
-  constructor(private dataStorageService: DataStorageService) {}
+  isAuthenticated: boolean = false;
+  private userSub: Subscription = new Subscription();
+  user: User | null = null;
+
+  constructor(
+    private dataStorageService: DataStorageService,
+    private loginService: LoginService
+  ) {}
+
+  ngOnInit() {
+    this.userSub = this.loginService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+    });
+  }
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 
   save() {
     this.dataStorageService.storeMenu();

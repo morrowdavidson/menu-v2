@@ -9,6 +9,8 @@ import { MenuService } from '../../../services/menu.service';
 import { Section } from '../../../models/section.model';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-edit-item-form',
@@ -31,10 +33,13 @@ export class EditItemFormComponent {
     price: 0,
   };
   private subscriptions = new Subscription();
+  isAuthenticated: boolean = false;
+  user: User | null = null;
 
   constructor(
     private menuService: MenuService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -49,6 +54,12 @@ export class EditItemFormComponent {
         this.editMenuItem = menuItem;
       })
     );
+    this.subscriptions.add(
+      this.loginService.user.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+      })
+    );
   }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -61,16 +72,21 @@ export class EditItemFormComponent {
     description: '',
     price: 0,
   };
-  addNewItem(section: string) {
+  addNewItem() {
     this.menuService.addMenuItem(this.newMenuItem, this.sectionTitle);
-    this.dataService.storeMenu();
+    this.checkAuth();
     console.log(this.sectionTitle);
   }
-  deleteItem(itemToBeDeleted: MenuItem) {
+  deleteItem() {
     this.menuService.deleteMenuItem(this.editMenuItem);
-    this.dataService.storeMenu();
+    this.checkAuth();
   }
   cancel() {
     this.menuService.cancelEdit();
+  }
+  checkAuth() {
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
   }
 }

@@ -6,7 +6,7 @@
   <button
     mat-icon-button
     class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
+    aria-label="share"
     [routerLink]="['/menu/' + user?.id]"
   >
     <mat-icon>share</mat-icon>
@@ -15,7 +15,7 @@
     (click)="logoutClicked()"
     mat-icon-button
     class="example-icon"
-    aria-label="Example icon-button with share icon"
+    aria-label="logout"
   >
     <mat-icon>logout</mat-icon>
   </button>
@@ -24,7 +24,7 @@
   <button
     mat-icon-button
     class="example-icon"
-    aria-label="Example icon-button with share icon"
+    aria-label="login"
     [routerLink]="['/auth']"
     routerLinkActive="router-link-active"
   >

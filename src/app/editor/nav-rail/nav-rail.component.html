@@ -53,19 +53,22 @@
       </button>
       Preview
     </li>
-    <!-- <li>
+    @if (!isAuthenticated){
+
+    <li>
       <button
         routerLinkActive="active-link"
         mat-icon-button
         color="primary"
         aria-label="Example icon button with a home icon"
-        (click)="save()"
+        [routerLink]="['/auth']"
       >
         <mat-icon>save</mat-icon>
       </button>
       Save
     </li>
-
+    }
+    <!-- 
     <li>
       <button
         routerLinkActive="active-link"

@@ -14,6 +14,8 @@ import { CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-menu-sort',
@@ -31,9 +33,13 @@ import { DataStorageService } from '../../../services/data-storage.service';
 export class MenuSortComponent implements OnInit {
   sections: Section[] = [];
   selectionsSubscription?: Subscription;
+  isAuthenticated: boolean = false;
+  private userSub: Subscription = new Subscription();
+  user: User | null = null;
 
   constructor(
     private menuService: MenuService,
+    private loginService: LoginService,
     private dataService: DataStorageService
   ) {}
 
@@ -43,9 +49,14 @@ export class MenuSortComponent implements OnInit {
         this.sections = sectionEls;
       }
     );
+    this.userSub = this.loginService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+    });
   }
   ngOnDestroy() {
     this.selectionsSubscription?.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
   itemClicked(item: MenuItem) {
@@ -55,15 +66,12 @@ export class MenuSortComponent implements OnInit {
 
   drop(event: CdkDragDrop<MenuItem[]>) {
     if (event.previousContainer === event.container) {
-      console.log('same container::', event.container);
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
-      console.log('another container::', event.container);
-
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -71,6 +79,8 @@ export class MenuSortComponent implements OnInit {
         event.currentIndex
       );
     }
-    this.dataService.storeMenu();
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
   }
 }
