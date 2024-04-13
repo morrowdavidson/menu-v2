@@ -10,6 +10,8 @@ import { Section } from '../../../models/section.model';
 import { MatCardModule } from '@angular/material/card';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-sort-section',
@@ -19,9 +21,13 @@ import { DataStorageService } from '../../../services/data-storage.service';
   styleUrl: './sort-section.component.scss',
 })
 export class SortSectionComponent {
+  isAuthenticated: boolean = false;
+  user: User | null = null;
+
   constructor(
     private menuService: MenuService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService
   ) {}
   sections: Section[] = [];
   currentSection: Section = { title: '', menuItems: [] };
@@ -33,6 +39,12 @@ export class SortSectionComponent {
         this.sections = sectionEls;
       })
     );
+    this.subscriptions.add(
+      this.loginService.user.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -41,7 +53,9 @@ export class SortSectionComponent {
 
   drop(event: CdkDragDrop<Section[]>) {
     moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
-    this.dataService.storeMenu();
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
   }
   sectionClicked(section: Section) {
     this.menuService.setCurrentSection(section);

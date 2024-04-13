@@ -10,6 +10,8 @@ import { Section } from '../../../models/section.model';
 import { Subscription } from 'rxjs';
 import { FileUpload } from '../../../models/file-upload.model';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-item-form',
@@ -29,10 +31,14 @@ export class ItemFormComponent {
   private subscriptions = new Subscription();
   selectedFile: File | null = null;
   currentFileUpload?: FileUpload;
+  isAuthenticated: boolean = false;
+  private userSub: Subscription = new Subscription();
+  user: User | null = null;
 
   constructor(
     private menuService: MenuService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -41,9 +47,14 @@ export class ItemFormComponent {
         this.sections = sectionEls;
       })
     );
+    this.userSub = this.loginService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+    });
   }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.userSub.unsubscribe();
   }
   sectionTitle: string = 'Default Section';
 
@@ -55,7 +66,9 @@ export class ItemFormComponent {
   addNewItem(section: string) {
     this.menuService.addMenuItem(this.newMenuItem, this.sectionTitle);
     console.log(this.sectionTitle);
-    this.dataService.storeMenu();
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
     this.clearForm();
   }
   clearForm() {

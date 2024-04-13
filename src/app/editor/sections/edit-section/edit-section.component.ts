@@ -8,6 +8,8 @@ import { Section } from '../../../models/section.model';
 import { MenuService } from '../../../services/menu.service';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-edit-section',
@@ -23,9 +25,13 @@ import { DataStorageService } from '../../../services/data-storage.service';
   styleUrl: './edit-section.component.scss',
 })
 export class EditSectionComponent {
+  isAuthenticated: boolean = false;
+  user: User | null = null;
+
   constructor(
     private menuService: MenuService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService
   ) {}
   currentSection: Section = { title: '', menuItems: [] };
   private subscriptions = new Subscription();
@@ -36,16 +42,27 @@ export class EditSectionComponent {
         this.currentSection = section;
       })
     );
+    this.subscriptions.add(
+      this.loginService.user.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+      })
+    );
   }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
   saveClicked() {
     this.menuService.cancelSectionEdit();
-    this.dataService.storeMenu();
+    this.checkAuthAndStore();
   }
   deleteClicked(section: Section) {
     this.menuService.deleteSection(this.currentSection);
-    this.dataService.storeMenu();
+    this.checkAuthAndStore();
+  }
+  checkAuthAndStore() {
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
   }
 }

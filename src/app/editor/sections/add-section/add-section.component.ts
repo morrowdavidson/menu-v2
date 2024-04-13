@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { Section } from '../../../models/section.model';
 import { MenuService } from '../../../services/menu.service';
 import { DataStorageService } from '../../../services/data-storage.service';
+import { LoginService } from '../../../services/login.service';
+import { Subscription } from 'rxjs';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-add-section',
@@ -22,17 +25,32 @@ import { DataStorageService } from '../../../services/data-storage.service';
   styleUrl: './add-section.component.scss',
 })
 export class AddSectionComponent {
+  isAuthenticated: boolean = false;
+  private userSub: Subscription = new Subscription();
+  user: User | null = null;
+
   constructor(
     private menuService: MenuService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService
   ) {}
   newSectionName: string = '';
 
+  ngOnInit() {
+    this.userSub = this.loginService.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+    });
+  }
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
+
   addNewSection() {
-    console.log('addNewSection:' + this.newSectionName);
     const newSection: Section = { title: this.newSectionName, menuItems: [] };
-    console.log(this.newSectionName);
     this.menuService.addSection(newSection);
-    this.dataService.storeMenu();
+    if (this.isAuthenticated) {
+      this.dataService.storeMenu();
+    }
   }
 }
