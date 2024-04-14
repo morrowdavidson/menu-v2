@@ -39,6 +39,12 @@ export class MenuService {
 
   constructor() {
     this._sections.next([]);
+    if (this._sections.value.length === 0) {
+      this.resetSections();
+    }
+
+    console.log('this sections:');
+    console.log(this._sections.value);
   }
 
   addMenuItem(menuItemToAdd: MenuItem, sectionTitle: string) {
@@ -57,7 +63,6 @@ export class MenuService {
   }
   editMenuItem() {
     this._isEditingItem.next(true);
-    console.log(this._isEditingItem);
   }
   setCurrentMenuItem(menuItem: MenuItem) {
     this._currentMenuItem.next(menuItem);
@@ -85,7 +90,6 @@ export class MenuService {
   }
   editSection() {
     this._isEditingSection.next(true);
-    console.log(this._isEditingSection);
   }
   cancelSectionEdit() {
     this._isEditingSection.next(false);
@@ -109,5 +113,8 @@ export class MenuService {
   }
   setSectionsForView(sections: Section[]) {
     this._sectionsForView.next(sections);
+  }
+  resetSections() {
+    this._sections.next([{ title: 'Main Menu', menuItems: [] }]);
   }
 }

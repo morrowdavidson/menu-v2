@@ -110,7 +110,7 @@ export class LoginService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
-    this.menuService.setSections([]);
+    this.menuService.resetSections();
     this.resaurantService.resetRestaurant();
   }
 
