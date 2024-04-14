@@ -85,14 +85,15 @@
     <mat-label>Website</mat-label>
     <input [(ngModel)]="editRestaurant.website" matInput />
   </mat-form-field>
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Open</mat-label>
     <input [(ngModel)]="editRestaurant.open" matInput />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Close</mat-label>
     <input [(ngModel)]="editRestaurant.close" matInput />
-  </mat-form-field>
+  </mat-form-field> -->
+  <button (click)="saveClicked()" mat-button color="primary">Save</button>
 </div>
 <mat-card class="preview-card">
   <mat-card-content>

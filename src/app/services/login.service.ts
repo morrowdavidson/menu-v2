@@ -75,6 +75,7 @@ export class LoginService {
   }
 
   autoLogin() {
+    console.log('autoLogin');
     const userData: {
       email: string;
       id: string;
@@ -115,6 +116,7 @@ export class LoginService {
   }
 
   autoLogout(expirationDuration: number) {
+    console.log('autoLogout');
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);

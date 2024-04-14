@@ -9,6 +9,7 @@ import { MatButton } from '@angular/material/button';
 import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
 import { Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
+import { DataStorageService } from '../../services/data-storage.service';
 
 @Component({
   selector: 'app-restaurant',
@@ -26,7 +27,10 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './restaurant.component.scss',
 })
 export class RestaurantComponent {
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(
+    private restaurantService: RestaurantService,
+    private dataService: DataStorageService
+  ) {}
 
   editRestaurantSubscription?: Subscription;
   editRestaurant: Restaurant;
@@ -39,5 +43,9 @@ export class RestaurantComponent {
   }
   ngOnDestroy() {
     this.editRestaurantSubscription?.unsubscribe();
+  }
+
+  saveClicked() {
+    this.dataService.storeRestaurant();
   }
 }
