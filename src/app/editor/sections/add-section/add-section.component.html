@@ -4,6 +4,11 @@
   <mat-label>Section Name</mat-label>
   <input matInput [(ngModel)]="newSectionName" />
 </mat-form-field>
-<button mat-raised-button color="primary" (click)="addNewSection()">
+<button
+  [disabled]="newSectionName == ''"
+  mat-raised-button
+  color="primary"
+  (click)="addNewSection()"
+>
   Add Section
 </button>
