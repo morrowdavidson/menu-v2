@@ -45,4 +45,15 @@ export class MenuHeaderComponent {
   getBackgroundImageStyle() {
     return `background-image:url(${this.restaurant.featuredImgURL})`;
   }
+
+  goToWebsite() {
+    window.open('https://' + this.restaurant.website, '_blank');
+  }
+  goToMaps() {
+    const address = encodeURIComponent(this.restaurant.address);
+    window.open(
+      'https://www.google.com/maps/search/?api=1&query=' + address,
+      '_blank'
+    );
+  }
 }

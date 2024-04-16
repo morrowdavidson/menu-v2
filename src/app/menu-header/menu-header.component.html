@@ -9,7 +9,12 @@
   </div>
   <div class="meta-data address">
     <div>
-      <button mat-button class="meta-button" color="primary">
+      <button
+        mat-button
+        class="meta-button"
+        color="primary"
+        (click)="goToMaps()"
+      >
         <mat-icon>location_on</mat-icon>
         <p>{{ restaurant.address }}</p>
         <p class="city-state">{{ restaurant.city }}, {{ restaurant.state }}</p>
@@ -25,11 +30,14 @@
     </a>
   </div>
   <div class="website">
-    <a [href]="restaurant.website">
-      <button mat-button class="meta-button" color="primary">
-        <mat-icon>language</mat-icon>
-        {{ restaurant.website }}
-      </button>
-    </a>
+    <button
+      mat-button
+      class="meta-button"
+      color="primary"
+      (click)="goToWebsite()"
+    >
+      <mat-icon>language</mat-icon>
+      {{ restaurant.website }}
+    </button>
   </div>
 </div>
