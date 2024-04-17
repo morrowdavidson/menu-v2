@@ -1,9 +1,8 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  padding: 2em;
+.container {
+  display: grid;
+  grid-template-columns: 300px auto;
+  gap: 2em;
 }
-
 form {
   display: flex;
   flex-direction: column;

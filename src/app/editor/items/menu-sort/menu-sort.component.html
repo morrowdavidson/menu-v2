@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="card">
   <mat-card-header>
     <mat-card-title>Menu</mat-card-title>
     <mat-card-subtitle
@@ -7,47 +7,48 @@
   </mat-card-header>
   <mat-card-content>
     <div cdkDropListGroup>
-      <div class="example-container">
+      <div class="container">
         @for (section of sections; track section.title) {
+        <div class="header-items-container">
+          <h4>{{ section.title }}</h4>
 
-        <h4>{{ section.title }}</h4>
+          <div
+            cdkDropList
+            [cdkDropListData]="section.menuItems"
+            class="list"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of section.menuItems; track item.name) {
+            <div (click)="itemClicked(item)" class="box" cdkDrag>
+              <div class="sort-content">
+                <div class="sort-name">
+                  <b
+                    >{{
+                      item.name.length > 30
+                        ? item.name.substring(0, 30) + "..."
+                        : item.name
+                    }}
+                  </b>
+                </div>
 
-        <div
-          cdkDropList
-          [cdkDropListData]="section.menuItems"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)"
-        >
-          @for (item of section.menuItems; track item.name) {
-          <div (click)="itemClicked(item)" class="example-box" cdkDrag>
-            <div class="sort-content">
-              <div class="sort-name">
-                <b
-                  >{{
-                    item.name.length > 30
-                      ? item.name.substring(0, 30) + "..."
-                      : item.name
+                <div class="sort-description">
+                  {{
+                    item.description.length > 30
+                      ? item.description.substring(0, 30) + "..."
+                      : item.description
                   }}
-                </b>
+                </div>
+                <div class="sort-price">
+                  <i>{{ item.price | currency }}</i>
+                </div>
               </div>
 
-              <div class="sort-description">
-                {{
-                  item.description.length > 30
-                    ? item.description.substring(0, 30) + "..."
-                    : item.description
-                }}
-              </div>
-              <div class="sort-price">
-                <i>{{ item.price | currency }}</i>
-              </div>
+              @if (item.imagePath) {
+              <img height="30px" [src]="item.imagePath" />
+              }
             </div>
-
-            @if (item.imagePath) {
-            <img height="30px" [src]="item.imagePath" />
             }
           </div>
-          }
         </div>
         }
       </div>
