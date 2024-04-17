@@ -3,6 +3,11 @@
   height: 100%;
   grid-template-columns: 300px auto;
   gap: 2em;
+
+  @media (max-width: 730px) {
+    grid-template-columns: auto;
+    padding-right: 2em;
+  }
 }
 .restaurant-form {
   display: flex;
