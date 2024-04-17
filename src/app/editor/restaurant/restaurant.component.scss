@@ -1,14 +1,10 @@
-:host {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin: 2em;
-  flex-wrap: wrap;
-}
 .container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 300px auto;
+  gap: 2em;
+}
+.restaurant-form {
   display: flex;
   flex-direction: column;
-  margin-right: 2em;
-}
-.preview-card {
 }
