@@ -56,4 +56,7 @@ export class MenuHeaderComponent {
       '_blank'
     );
   }
+  makePhoneCall() {
+    window.location.href = 'tel:' + this.restaurant.phone;
+  }
 }

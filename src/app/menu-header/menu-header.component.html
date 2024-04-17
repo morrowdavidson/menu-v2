@@ -22,12 +22,15 @@
     </div>
   </div>
   <div class="phone">
-    <a [href]="'tel:' + restaurant.phone">
-      <button mat-button class="meta-button" color="primary">
-        <mat-icon>call</mat-icon>
-        {{ restaurant.phone }}
-      </button>
-    </a>
+    <button
+      mat-button
+      class="meta-button"
+      color="primary"
+      (click)="makePhoneCall()"
+    >
+      <mat-icon>call</mat-icon>
+      {{ restaurant.phone }}
+    </button>
   </div>
   <div class="website">
     <button
