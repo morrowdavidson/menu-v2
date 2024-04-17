@@ -1,78 +1,82 @@
-@if(errorMsg) {
-<mat-card>
-  <mat-card-content>{{ errorMsg }}</mat-card-content>
-</mat-card>
-} @if (isLoading) { <mat-spinner></mat-spinner>
-} @else { @if (isLoginMode) {
-<h2>Login</h2>
+<div class="container">
+  <div>
+    @if(errorMsg) {
+    <mat-card>
+      <mat-card-content>{{ errorMsg }}</mat-card-content>
+    </mat-card>
+    } @if (isLoading) { <mat-spinner></mat-spinner>
+    } @else { @if (isLoginMode) {
+    <h2>Login</h2>
 
-}@else {
-<h2>Sign Up</h2>
-}
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input
-      ngModel
-      required
-      matInput
-      type="email"
-      id="email"
-      email
-      name="email"
-    />
-  </mat-form-field>
+    }@else {
+    <h2>Sign Up</h2>
+    }
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          ngModel
+          required
+          matInput
+          type="email"
+          id="email"
+          email
+          name="email"
+        />
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
-    <input
-      name="password"
-      matInput
-      [type]="passwordVisible ? 'text' : 'password'"
-      required
-      ngModel
-      name="password"
-      minlength="6"
-    />
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          name="password"
+          matInput
+          [type]="passwordVisible ? 'text' : 'password'"
+          required
+          ngModel
+          name="password"
+          minlength="6"
+        />
 
-    <mat-icon matSuffix (click)="passwordVisible = !passwordVisible">{{
-      passwordVisible ? "visibility" : "visibility_off"
-    }}</mat-icon>
-    <mat-hint>Must be 6 or more characters</mat-hint>
-  </mat-form-field>
+        <mat-icon matSuffix (click)="passwordVisible = !passwordVisible">{{
+          passwordVisible ? "visibility" : "visibility_off"
+        }}</mat-icon>
+        <mat-hint>Must be 6 or more characters</mat-hint>
+      </mat-form-field>
 
-  @if (isLoginMode) {
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!authForm.valid"
-  >
-    Login
-  </button>
-  <p>
-    Don't have an account?
-    <button mat-button color="primary" (click)="signUpClicked()">
-      Sign Up Now
-    </button>
-  </p>
+      @if (isLoginMode) {
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!authForm.valid"
+      >
+        Login
+      </button>
+      <p>
+        Don't have an account?
+        <button mat-button color="primary" (click)="signUpClicked()">
+          Sign Up Now
+        </button>
+      </p>
 
-  } @else {
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!authForm.valid"
-  >
-    Sign Up
-  </button>
-  <p>
-    Have an account?
-    <button mat-button color="primary" (click)="loginClicked()">
-      Login Now
-    </button>
-  </p>
+      } @else {
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!authForm.valid"
+      >
+        Sign Up
+      </button>
+      <p>
+        Have an account?
+        <button mat-button color="primary" (click)="loginClicked()">
+          Login Now
+        </button>
+      </p>
 
-  }
-</form>
-}
+      }
+    </form>
+    }
+  </div>
+</div>
