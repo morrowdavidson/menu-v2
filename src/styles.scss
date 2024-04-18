@@ -11,7 +11,33 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$menu-v2-primary: mat.define-palette(mat.$indigo-palette);
+
+$wine-palette: (
+  50: #ffe3d5,
+  100: #f1c2b8,
+  200: #d49f95,
+  300: #b67c70,
+  400: #a06155,
+  500: #4c191b,
+  600: #4c191b,
+  700: #4c191b,
+  800: #4c191b,
+  900: #4c191b,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$menu-v2-primary: mat.define-palette($wine-palette);
 $menu-v2-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).

@@ -1,5 +1,11 @@
+@import "../../../styles";
+
+.container {
+  min-height: 100%;
+  background-color: #f0f0f0;
+}
+
 nav {
-  background-color: rgb(242, 245, 255);
   width: 70px;
   height: calc(100vh - 64px);
   position: sticky;
@@ -27,7 +33,7 @@ p {
   margin: 0px;
 }
 .active-link {
-  background-color: #3f51b5;
+  background-color: map-get($menu-v2-primary, 500);
   border-radius: 100px;
   padding: 2px;
 
