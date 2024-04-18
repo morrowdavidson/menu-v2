@@ -72,16 +72,13 @@ export class EditItemFormComponent {
     description: '',
     price: 0,
   };
-  addNewItem() {
-    this.menuService.addMenuItem(this.newMenuItem, this.sectionTitle);
-    this.checkAuth();
-    console.log(this.sectionTitle);
-  }
+
   deleteItem() {
     this.menuService.deleteMenuItem(this.editMenuItem);
     this.checkAuth();
   }
-  cancel() {
+  saveItem() {
+    this.checkAuth();
     this.menuService.cancelEdit();
   }
   checkAuth() {

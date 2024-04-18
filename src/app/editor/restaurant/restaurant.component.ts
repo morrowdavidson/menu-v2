@@ -10,6 +10,9 @@ import { MenuHeaderComponent } from '../../menu-header/menu-header.component';
 import { Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { DataStorageService } from '../../services/data-storage.service';
+import { LoginService } from '../../services/login.service';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurant',
@@ -29,23 +32,38 @@ import { DataStorageService } from '../../services/data-storage.service';
 export class RestaurantComponent {
   constructor(
     private restaurantService: RestaurantService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private loginService: LoginService,
+    private router: Router
   ) {}
+  private subscriptions = new Subscription();
+  isAuthenticated: boolean = false;
+  user: User | null = null;
 
-  editRestaurantSubscription?: Subscription;
   editRestaurant: Restaurant;
 
   ngOnInit() {
-    this.editRestaurantSubscription =
+    this.subscriptions.add(
       this.restaurantService.restaurant$.subscribe(
         (restaurant) => (this.editRestaurant = restaurant)
-      );
+      )
+    );
+    this.subscriptions.add(
+      this.loginService.user.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+      })
+    );
   }
   ngOnDestroy() {
-    this.editRestaurantSubscription?.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   saveClicked() {
-    this.dataService.storeRestaurant();
+    if (this.isAuthenticated) {
+      this.dataService.storeRestaurant();
+    } else {
+      this.router.navigate(['/auth']);
+    }
   }
 }

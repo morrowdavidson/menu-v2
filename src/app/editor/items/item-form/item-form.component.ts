@@ -32,7 +32,6 @@ export class ItemFormComponent {
   selectedFile: File | null = null;
   currentFileUpload?: FileUpload;
   isAuthenticated: boolean = false;
-  private userSub: Subscription = new Subscription();
   user: User | null = null;
 
   constructor(
@@ -47,14 +46,15 @@ export class ItemFormComponent {
         this.sections = sectionEls;
       })
     );
-    this.userSub = this.loginService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-      this.user = user;
-    });
+    this.subscriptions.add(
+      this.loginService.user.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+      })
+    );
   }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-    this.userSub.unsubscribe();
   }
   sectionTitle: string = 'Default Section';
 
