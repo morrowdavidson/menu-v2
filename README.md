@@ -1,6 +1,16 @@
-# MenuV2
+# Menu Maker
+
+The Menu Maker App is an Angular-based application designed to streamline the process of creating and managing online menus for restaurants. It provides an intuitive interface for restaurant owners to dynamically construct their menus, offering a seamless experience for both the business and the end-user. It leverages Material UI for a modern, responsive user interface and Firebase for secure user authentication.
+
+Live demo: https://ng-course-c5335.web.app/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+
+## Features
+
+- **Drag and Drop Functionality**: Easily arrange and organize menu items with an intuitive drag-and-drop interface.
+- **Material UI**: A sleek, user-friendly design built with Material UI components for a superior user experience.
+- **Firebase Authentication**: Secure user registration and login functionality powered by Firebase.
 
 ## Development server
 

@@ -6,7 +6,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { convertToParamMap } from '@angular/router';
 
 describe('MenuViewComponent', () => {
   let component: MenuViewComponent;
@@ -19,7 +18,7 @@ describe('MenuViewComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(convertToParamMap({ id: 'testId' })), // Mock paramMap as an Observable
+            params: of({ id: 'testId' }), // Mock any necessary properties here
           },
         },
       ],
